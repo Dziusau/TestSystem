@@ -1,0 +1,10 @@
+10student_1
+1
+3student_2
+2
+0student_3
+3
+7student_0
+0
+0student_4
+4

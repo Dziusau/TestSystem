@@ -1,0 +1,3 @@
+﻿  Teacher.cpp
+D:\universityProgramming\bsuir\TestSystem\Test.h(61,14): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+  TestSystem.vcxproj -> D:\universityProgramming\bsuir\x64\Debug\TestSystem.exe
