@@ -72,8 +72,7 @@ void Menu::menu_teacher()
 		case '5':
 		{
 			cls;
-			cout << "Текущий логин: " << teacher.getLogin() << endl;
-			cout << "Текущий пароль: " << teacher.getPassword() << endl << endl;
+			(*teacher).printUser();
 			cout << "Изменить:" << endl;
 			cout << "1 - логин" << endl;
 			cout << "2 - пароль" << endl;
@@ -111,10 +110,10 @@ void Menu::teacher_addQuest()
 	switch (type)
 	{
 	case 1: case 2:
-		teacher.newQuestion(test_str, type);
+		(*teacher).newQuestion(test_str, type);
 		break;
 	default:
-		teacher.newQuestion(test_int);
+		(*teacher).newQuestion(test_int);
 		break;
 	}
 }
@@ -124,8 +123,8 @@ void Menu::teacher_viewQuest()
 	Test<string> test_str(1);
 	Test<int> test_int(0);
 
-	teacher.viewQuestions(test_str);
-	teacher.viewQuestions(test_int);
+	(*teacher).viewQuestions(test_str);
+	(*teacher).viewQuestions(test_int);
 }
 
 void Menu::teacher_viewStud(int key)
@@ -409,9 +408,9 @@ void Menu::teacher_edit(char key)
 			}
 
 			for (int i = 0; i < file_logins.size(); i++) {
-				if (file_logins[i] == teacher.getLogin()) {
+				if (file_logins[i] == (*teacher).getLogin()) {
 					file_logins[i] = login;
-					teacher.setLogin(login);
+					(*teacher).setLogin(login);
 					break;
 				}
 			}
@@ -429,11 +428,11 @@ void Menu::teacher_edit(char key)
 			}
 			cout << endl;
 
-			teacher.setPassword(password);
+			(*teacher).setPassword(password);
 			for (int i = 0; i < password.size(); i++) password[i] += 6;
 
 			for (int i = 0; i < file_logins.size(); i++) {
-				if (file_logins[i] == teacher.getLogin()) {
+				if (file_logins[i] == (*teacher).getLogin()) {
 					file_passwords[i] = password;
 					break;
 				}
@@ -461,15 +460,15 @@ void Menu::teacher_edit(char key)
 			}
 			cout << endl;
 
-			teacher.setPassword(password);
+			(*teacher).setPassword(password);
 			for (int i = 0; i < password.size(); i++) password[i] += 6;
 
 			for (int i = 0; i < file_logins.size(); i++) {
-				if (file_logins[i] == teacher.getLogin()) {
+				if (file_logins[i] == (*teacher).getLogin()) {
 					file_logins[i] = login;
 					file_passwords[i] = password;
-					teacher.setLogin(login);
-					teacher.setPassword(password);
+					(*teacher).setLogin(login);
+					(*teacher).setPassword(password);
 					break;
 				}
 			}
@@ -504,7 +503,7 @@ void Menu::teacher_deleteTeach()
 			file_in >> temp_teacher;
 
 			if (file_in.eof()) break;
-			else if (temp_teacher.getLogin() != teacher.getLogin())
+			else if (temp_teacher.getLogin() != (*teacher).getLogin())
 				file_teachers.push_back(temp_teacher);
 		}
 		file_in.close();
@@ -547,8 +546,8 @@ void Menu::menu_student()
 		case '3':
 		{
 			cls;
-			cout << "Текущий логин: " << student.getLogin() << endl;
-			cout << "Текущий номер группы: " << student.getGroup() << endl << endl;
+			cout << "Текущий логин: " << (*student).getLogin() << endl;
+			cout << "Текущий номер группы: " << (*student).getGroup() << endl << endl;
 			cout << "Изменить:" << endl;
 			cout << "1 - логин" << endl;
 			cout << "2 - номер группы" << endl;
@@ -590,14 +589,14 @@ void Menu::student_passTest()
 		switch (type)
 		{
 		case 1: case 2:
-			student.passTest(test_str, type);
+			(*student).passTest(test_str, type);
 			break;
 		default:
-			student.passTest(test_int, type);
+			(*student).passTest(test_int, type);
 			break;
 		}
 		cls;
-		cout << "Тест пройден.\nВаша оценка: " << student.getMark() << endl;
+		cout << "Тест пройден.\nВаша оценка: " << (*student).getMark() << endl;
 		Menu::student_edit('u');
 		pause;
 	}
@@ -648,9 +647,9 @@ void Menu::student_edit(char key)
 			}
 
 			for (int i = 0; i < file_logins.size(); i++) {
-				if (file_logins[i] == student.getLogin()) {
+				if (file_logins[i] == (*student).getLogin()) {
 					file_logins[i] = login;
-					student.setLogin(login);
+					(*student).setLogin(login);
 					break;
 				}
 			}
@@ -662,9 +661,9 @@ void Menu::student_edit(char key)
 			getline(cin, group);
 
 			for (int i = 0; i < file_logins.size(); i++) {
-				if (file_logins[i] == student.getLogin()) {
+				if (file_logins[i] == (*student).getLogin()) {
 					file_groups[i] = group;
-					student.setGroup(stoi(group));
+					(*student).setGroup(stoi(group));
 					break;
 				}
 			}
@@ -686,11 +685,11 @@ void Menu::student_edit(char key)
 			getline(cin, group);
 
 			for (int i = 0; i < file_logins.size(); i++) {
-				if (file_logins[i] == student.getLogin()) {
+				if (file_logins[i] == (*student).getLogin()) {
 					file_logins[i] = login;
 					file_groups[i] = group;
-					student.setLogin(login);
-					student.setGroup(stoi(group));
+					(*student).setLogin(login);
+					(*student).setGroup(stoi(group));
 					break;
 				}
 			}
@@ -699,8 +698,8 @@ void Menu::student_edit(char key)
 		}
 		else {
 			for (int i = 0; i < file_logins.size(); i++) {
-				if (file_logins[i] == student.getLogin()) {
-					file_marks[i] = student.getMark();
+				if (file_logins[i] == (*student).getLogin()) {
+					file_marks[i] = (*student).getMark();
 					break;
 				}
 			}

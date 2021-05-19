@@ -24,6 +24,7 @@ public:
 	int answer(Question<int>& question, int answer);
 	void passTest(Test<string>& test, int type);
 	void passTest(Test<int>& test, int type);
+	void printUser();
 
 	friend istream& operator>>(istream& stream, Student& student);
 	friend ostream& operator<<(ostream& stream, Student& student);

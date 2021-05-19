@@ -1,7 +1,5 @@
 #include "Teacher.h"
 
-Teacher::Teacher() :User(1) {}
-
 void Teacher::viewQuestions(Test<string>& test)
 {
 	for (auto i : *(test.getQuestions()))
@@ -142,6 +140,12 @@ void Teacher::newQuestion(Test<int>& test)
 	question.write2file(0);
 }
 
+void Teacher::printUser()
+{
+	cout << "Текущий логин: " << this->getLogin() << endl;
+	cout << "Текущий пароль: " << this->getPassword() << endl << endl;
+}
+
 istream& operator>>(istream& stream, Teacher& teacher)
 {
 	string login;
@@ -172,7 +176,7 @@ void checkAnswer(string& answer, int key)
 		isCorrect = true;
 		cout << endl << ((key == 0)?"Введите правильную комбинацию (пример: 1а2б3в): ": "Ваш ответ: ");
 		getline(cin, answer);
-		for (auto c : answer) c = tolower(c);
+		for (int i = 0; i < answer.size(); i++) answer[i] = tolower(answer[i]);
 
 		if (answer.find("12") != string::npos || answer.find("13") != string::npos || answer.find("21") != string::npos || answer.find("23") != string::npos || answer.find("31") != string::npos || answer.find("32") != string::npos) {
 			cout << "Некорректный ввод: нельзя ввести две цифры подряд!\nПожалуйста, повторите попытку." << endl;

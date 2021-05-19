@@ -4,14 +4,21 @@
 #include "Question.h"
 #include "Test.h"
 #include "Authorization.h"
+#include <memory>
 
 class Menu {
 public:
-	Teacher teacher;
-	Student student;
+	unique_ptr<Teacher> teacher;
+	unique_ptr<Student> student;
 
-	Menu(Teacher teacher) : teacher(teacher) {};
-	Menu(Student student) : student(student) {};
+	Menu(Teacher teacher) {
+		this->teacher = make_unique<Teacher>();
+		*(this->teacher) = teacher;
+	}
+	Menu(Student student) {
+		this->student = make_unique<Student>();
+		*(this->student) = student;
+	}
 
 	void menu_teacher();
 	void teacher_addQuest();

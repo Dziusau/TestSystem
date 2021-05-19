@@ -1,6 +1,6 @@
 #include "Student.h"
 
-Student::Student() : User(0), group(0), mark(0) {}
+Student::Student() : group(0), mark(0) {}
 
 void Student::setMark(int mark) { this->mark = mark; }
 
@@ -139,6 +139,13 @@ void Student::passTest(Test<int>& questions, int type)
 		system("pause");
 	}
 	this->setMark(questions.rateStudent(test.size(), correct_answers));
+}
+
+void Student::printUser()
+{
+	cout.setf(ios::left);
+	cout << setw(20) << "Имя" << setw(7) << "Группа" << "Оценка" << endl;
+	cout << setw(20) << this->getLogin() << setw(7) << this->group << this->mark;
 }
 
 istream& operator>>(istream& stream, Student& student)

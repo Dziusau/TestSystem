@@ -1,13 +1,16 @@
 #include "User.h"
 
-User::User(int key = 0)
+int User::key = 0;
+
+User::User()
 {
-	this->key = key;
 	this->login = "";
 	this->password = "";
 }
 
 int User::getKey() { return key; }
+
+void User::setKey(int key) { User::key = key; }
 
 string User::getLogin() { return login; }
 string User::getPassword() { return password; }

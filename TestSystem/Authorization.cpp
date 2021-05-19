@@ -58,6 +58,7 @@ void teacher_auth()
 {
 	bool check = false;
 	Teacher teacher;
+	teacher.setKey(1);
 	string teacher_log;
 	string teacher_pass;
 	string login;
@@ -68,9 +69,7 @@ void teacher_auth()
 		if (!file.is_open()) throw "Файл не открыт!\nПопробуйте создать преподавателя.";
 		while (!file.eof()) {
 			getline(file, login);
-			//if (!login.empty()) login.pop_back();
 			getline(file, password);
-			//if (!password.empty()) password.pop_back();
 			if (teacher_log == login) {
 				check = true;
 				for (int i = 0; i < password.size(); i++) password[i] -= 6;
@@ -128,6 +127,7 @@ void student_auth()
 {
 	bool check = false;
 	Student student;
+	student.setKey(0);
 	string student_log;
 	string student_group;
 	string login;

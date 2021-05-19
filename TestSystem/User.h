@@ -4,17 +4,20 @@ using namespace std;
 
 class User
 {
-    int key;
+    static int key;
     string login;
     string password;
 
 public:
-    User(int key);
+    User();
 
-    int getKey();
+    static int getKey();
+    static void setKey(int key);
     string getLogin();
     string getPassword();
 
     void setLogin(string login);
     void setPassword(string password);
+
+    virtual void printUser() = 0;
 };
